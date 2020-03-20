@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="5"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Date" />
+
+        <EditText
+            android:id="@+id/datebox"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="5"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pollinator" />
+
+        <EditText
+            android:id="@+id/pollinatorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=""/>
+        <TextView
+            android:id="@+id/textView_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Unique Identifier" />
+
+        <EditText
+            android:id="@+id/editText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Current Location"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/editTextUserLoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+        <Button
+            android:id="@+id/takePic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take Picture" />
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+        </FrameLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true">
+
+            <Button
+                android:id="@+id/sendData"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Send Data"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/viewData"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/sendData"
+                android:text="View Data"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/button_Delete"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/button_update"
+                android:text="Delete"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/button_update"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Update"
+                android:textSize="10dp" />
+
+
+            <Button
+                android:id="@+id/gotoLogin"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/button_Delete"
+                android:layout_alignParentRight="true"
+                android:text="LOGIN SCREEN" />
+
+            <Button
+                android:id="@+id/gotoRegister"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/sendData"
+                android:layout_alignParentLeft="true"
+                android:text="REGISTER SCREEN" />
+            <Button
+                android:id="@+id/buttonOpenMap"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/gotoRegister"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:text="Map" />
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
