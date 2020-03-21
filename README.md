@@ -11,11 +11,6 @@ In this repository is the code for the Android Studio Environment of Programming
 Android Studio 
 DB Browser for SQLite 
 
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
 ## Deployment
 
 In the project there is a realease of the latest version of the application
