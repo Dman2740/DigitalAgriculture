@@ -2,7 +2,7 @@
 
 This is a datalogging project that I built for the UGA Botanical Garden for the purpose of image processing and data collection in terms of the pollinators that were inhabiting the garden. There are two databases that are setup to receive the pollinator information with data such as name,date,image,pollinator,and location associated with that pollinator. Furthermore there is a database that allows for users to be stored with their name,email,phone number, and password. With the Google Map feature it will set a custom marker on a map detailing the pollinator with information on where it was located by the user.
 
-## GettingStarted
+## Getting Started
 
 In this repository is the code for the Android Studio Environment of Programming. See deployment for notes on how to deploy the project on a live system.
 
