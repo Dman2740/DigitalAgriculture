@@ -36,14 +36,10 @@ public class ListDataActivity extends AppCompatActivity
         ArrayList<String> listData = new ArrayList<>();
         while (data.moveToNext())
         {
-            listData.add(data.getString(0));
-            listData.add(data.getString(1));
-            listData.add(data.getString(2));
-            listData.add(data.getString(3));
-            listData.add(data.getString(4));
-            listData.add(data.getString(5));
-            listData.add(data.getString(6));
-
+            listData.add(data.getString(0));//Id
+            listData.add(data.getString(1));//Category
+            listData.add(data.getString(2));//Name
+            listData.add(data.getString(4));//Pollinator
         }
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
         mListView.setAdapter(adapter);

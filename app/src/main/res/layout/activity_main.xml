@@ -6,15 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Category" />
+
+        <EditText
+            android:id="@+id/textCategory"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:ems="5"
+            android:inputType="textPersonName"
+            android:text="" />
 
         <TextView
             android:id="@+id/textView2"
@@ -25,7 +34,7 @@
         <EditText
             android:id="@+id/nameText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:ems="5"
             android:inputType="textPersonName"
             android:text="" />
@@ -39,54 +48,54 @@
         <EditText
             android:id="@+id/datebox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:ems="5"
             android:inputType="date" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:text="Pollinator" />
 
         <EditText
             android:id="@+id/pollinatorText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_height="40dp"
+            android:ems="5"
             android:inputType="textPersonName"
             android:text=""/>
         <TextView
             android:id="@+id/textView_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:text="Unique Identifier" />
 
         <EditText
             android:id="@+id/editText_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_height="40dp"
+            android:ems="5"
             android:inputType="textPersonName"
             android:text="" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:text="Current Location"
             android:ems="10" />
 
         <EditText
             android:id="@+id/editTextUserLoc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text=""/>
 
         <Button
             android:id="@+id/takePic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="Take Picture" />
         <FrameLayout
             android:layout_width="150dp"
@@ -158,14 +167,20 @@
             <Button
                 android:id="@+id/buttonOpenMap"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:layout_below="@+id/gotoRegister"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:text="Map" />
+            <Button
+                android:id="@+id/buttonGraph"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/buttonOpenMap"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:text="Graph" />
         </RelativeLayout>
-
-
 
 
     </LinearLayout>

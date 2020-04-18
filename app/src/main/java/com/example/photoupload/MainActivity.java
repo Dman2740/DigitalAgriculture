@@ -18,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.widget.Toast;
 
@@ -41,17 +43,19 @@ public class MainActivity extends AppCompatActivity
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE=101;
     Button takePic, sendData, viewData, btnDelete,
-            btnviewUpdate,btnRegister,btnLogin,btnOpenMap;
+            btnviewUpdate,btnRegister,btnLogin,btnOpenMap,btnGraph;
     ImageView imageView;
     DatabaseHelper mDatabaseHelper;
     EditText editTextName, editTextDate, editTextPollinator,
-            editTextId,editTextLocation;
+            editTextId,editTextLocation,editTextCategory;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     Bitmap photo;
     long runningCounter;
     public LocationRequest locationRequest;
     public LocationCallback locationCallback;
+    SimpleDateFormat sdf;
+    Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +63,12 @@ public class MainActivity extends AppCompatActivity
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         setContentView(R.layout.activity_main);
         mDatabaseHelper = new DatabaseHelper(this);
-        Calendar calendar = Calendar.getInstance();
-        String currentDate = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+        sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        date=new Date();
+        String currentDate=sdf.format(date);
         TextView textViewDate = findViewById(R.id.datebox);
         textViewDate.setText(currentDate);
+        btnGraph=findViewById(R.id.buttonGraph);
         btnDelete = findViewById(R.id.button_Delete);
         takePic = findViewById(R.id.takePic);
         imageView = findViewById(R.id.image);
@@ -70,6 +76,7 @@ public class MainActivity extends AppCompatActivity
         editTextName = findViewById(R.id.nameText);
         editTextDate = findViewById(R.id.datebox);
         editTextPollinator = findViewById(R.id.pollinatorText);
+        editTextCategory=findViewById(R.id.textCategory);
         editTextId = findViewById(R.id.editText_id);
         btnviewUpdate = findViewById(R.id.button_update);
         editTextLocation = findViewById(R.id.editTextUserLoc);
@@ -87,6 +94,7 @@ public class MainActivity extends AppCompatActivity
         DeleteData();
         UpdateData();
         gotoMap();
+        gotoGraph();
         fetchLastLocation();
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -108,6 +116,9 @@ public class MainActivity extends AppCompatActivity
         };
     }
 
+
+
+
     public void gotoLogin()
     {
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +128,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+    public void gotoGraph()
+    {
+        btnGraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
     }
 
     public void gotoRegister()
@@ -177,20 +198,24 @@ public class MainActivity extends AppCompatActivity
                 String nameEntry = editTextName.getText().toString();
                 String dateEntry = editTextDate.getText().toString();
                 String pollinatorEntry = editTextPollinator.getText().toString();
-                double latitude=currentLocation.getLatitude();
-                double longitude=currentLocation.getLongitude();
-                boolean isInserted = mDatabaseHelper.insertData(nameEntry, dateEntry ,pollinatorEntry,photo,latitude,longitude);
+                String userLoc=editTextLocation.getText().toString();
+                String[] values=userLoc.split(" , ");
+                Double latitude = Double.parseDouble(values[0]);
+                Double longitude = Double.parseDouble(values[1]);
+                String categoryEntry=editTextCategory.getText().toString();
+                boolean isInserted = mDatabaseHelper.insertData(categoryEntry,nameEntry,dateEntry,pollinatorEntry,photo,latitude,longitude);
                 if ((nameEntry.length() != 0) && (dateEntry.length() != 0) && (pollinatorEntry.length() != 0))
                 {
                     if (isInserted == true)
                     {
-                        Calendar calendar = Calendar.getInstance();
-                        String currentDate = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+                        sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                        date=new Date();
+                        String currentDate=sdf.format(date);
                         TextView textViewDate = findViewById(R.id.datebox);
                         textViewDate.setText(currentDate);
                         editTextName.setText("");
                         editTextPollinator.setText("");
-                        latLngArrayList.add(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()));
+                        latLngArrayList.add(new LatLng(latitude,longitude));
                         runningCounter=runningCounter+1;
                         editTextId.setText(String.valueOf(runningCounter));
                         fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback,null);
@@ -220,6 +245,11 @@ public class MainActivity extends AppCompatActivity
                         mDatabaseHelper.deleteData(editTextId.getText().toString());
                         runningCounter=runningCounter-1;
                         editTextId.setText(String.valueOf(runningCounter));
+                        sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                        date=new Date();
+                        String currentDate=sdf.format(date);
+                        TextView textViewDate = findViewById(R.id.datebox);
+                        textViewDate.setText(currentDate);
                         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
                         toastMessage("Removed from database");
                     }
@@ -234,13 +264,17 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        boolean isUpdate=mDatabaseHelper.updateData(editTextId.getText().toString(),
+                        boolean isUpdate=mDatabaseHelper.updateData(editTextCategory.getText().toString(),editTextId.getText().toString(),
                                 editTextName.getText().toString(),
-                                editTextDate.getText().toString(),
-                                editTextPollinator.getText().toString(),
+                                editTextDate.getText().toString(),editTextPollinator.getText().toString(),
                                 photo);
                         if(isUpdate != false) {
                             Toast.makeText(MainActivity.this, "Data Update", Toast.LENGTH_LONG).show();
+                            sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                            date=new Date();
+                            String currentDate=sdf.format(date);
+                            TextView textViewDate = findViewById(R.id.datebox);
+                            textViewDate.setText(currentDate);
                             fetchLastLocation();
                         }
                         else if(isUpdate == false) {
